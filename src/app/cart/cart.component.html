@@ -1,0 +1,71 @@
+<form [formGroup]="cartForm" (ngSubmit)="processCartForm()" >
+    <table>
+      <tr>
+        <td>Name:</td>
+        <td><input type="text" placeholder="Name" size="30" formControlName="name"></td>
+      </tr>
+      <tr>
+        <td>Address:</td>
+        <td><input type="text" placeholder="Address" size="30" formControlName="address"></td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td><input type="email" placeholder="Email" size="30" formControlName="email"></td>
+      </tr>
+      <tr>
+        <td>Phone:</td>
+        <td><input type="text" placeholder="Phone" size="30" formControlName="phone"></td>
+      </tr>
+      <tr>
+          <td>Express:</td>
+          <td><input type="checkbox" id="ifExpress" value="yes" formControlName="express"></td>
+      </tr>
+      <tr>
+        <td>Delivery:</td>
+        <td>
+            <input type="radio" name="delivery" value="9am to 11am" formControlName="delivery">9am to 11am
+            <input type="radio" name="delivery" value="11am to 3pm" formControlName="delivery">11am to 3pm
+            <input type="radio" name="delivery" value="3pm to 5pm" formControlName="delivery">3pm to 5pm  
+        </td>
+      </tr>
+      <td>
+        <button type="button" (click)="addCartItem()">Add Item</button>
+      </td>
+    </table>
+
+    <br>
+
+    <div *ngIf="cartArray.length > 0">
+      <h2>Your order is empty</h2>
+    </div>
+
+    <table *ngIf="cartArray.length > 0">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="items">
+          <tr *ngFor="let c of cartArray.controls; let i = index" [formGroupName]="i">
+            <td>
+              <input type="text" size="10" placeholder="Item" formControlName="item">
+            </td>
+            <td>
+                <input type="text" size="10" placeholder="Quantity" formControlName="quantity">
+            </td>
+            <td>
+                <input type="text" size="10" placeholder="Price" formControlName="unitPrice">
+            </td>
+            <td>
+              <button type="button" (click)="removeCartItem(i)">X</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+
+    <table>
+      <button type="submit">Checkout</button>
+    </table>
+</form>
