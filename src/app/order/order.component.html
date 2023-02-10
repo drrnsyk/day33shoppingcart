@@ -1,3 +1,7 @@
+<div *ngIf="cart == null">
+    <h2>Your order is empty</h2>
+  </div>
+
 <table *ngIf="cart != null">
     <tr>
       <td>Name:</td>
@@ -27,5 +31,5 @@
       <td>Total:</td>
       <td>{{ total }}</td>
     </tr>
-  </table>
+</table>
   
