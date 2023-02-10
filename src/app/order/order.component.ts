@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Cart, Item } from '../model/model';
 
 @Component({
@@ -6,7 +6,7 @@ import { Cart, Item } from '../model/model';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
-export class OrderComponent {
+export class OrderComponent implements OnChanges {
 
   @Input()
   cart!: Cart
@@ -14,13 +14,16 @@ export class OrderComponent {
   @Input()
   items: Item[] = []
 
-  @Input()
-  total!: number
+  total: number = 0
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.info('changes: ', changes['cart'])
+    const c = changes['cart'].currentValue as Cart
 
+    for (let item of this.items)
+      this.total += item.quantity * item.unitPrice
 
-  
-
+  }
 
 
 }

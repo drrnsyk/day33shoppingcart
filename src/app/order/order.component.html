@@ -1,3 +1,7 @@
+<div *ngIf="cart == null">
+    <h2>Your order sheet is empty</h2>
+  </div>
+
 <table *ngIf="cart != null">
     <tr>
       <td>Name:</td>
